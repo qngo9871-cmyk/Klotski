@@ -1,0 +1,67 @@
+"home.title" = "Klotski";
+"home.subtitle" = "Huarong Dao Puzzle";
+"home.tier.easy" = "Easy";
+"home.tier.medium" = "Medium";
+"home.tier.hard" = "Hard";
+"home.tier.classic" = "The Classic";
+"home.locked" = "Pro";
+"home.completed" = "Solved";
+"home.crosssell.title" = "From the makers of ChineseChess Pro Classic";
+"home.crosssell.body" = "Enjoy Xiangqi? Try our Three Kingdoms strategy board game.";
+"home.crosssell.cta" = "View on the App Store";
+
+"puzzle.classic.name" = "The Classic (Heng Dao Li Ma)";
+"puzzle.easy1.name" = "Easy 1";
+"puzzle.easy2.name" = "Easy 2";
+"puzzle.easy3.name" = "Easy 3";
+"puzzle.easy4.name" = "Easy 4";
+"puzzle.medium1.name" = "Medium 1";
+"puzzle.medium2.name" = "Medium 2";
+"puzzle.medium3.name" = "Medium 3";
+"puzzle.medium4.name" = "Medium 4";
+"puzzle.medium5.name" = "Medium 5";
+"puzzle.medium6.name" = "Medium 6";
+"puzzle.medium7.name" = "Medium 7";
+"puzzle.hard1.name" = "Hard 1";
+"puzzle.hard2.name" = "Hard 2";
+"puzzle.hard3.name" = "Hard 3";
+"puzzle.hard4.name" = "Hard 4";
+"puzzle.hard5.name" = "Hard 5";
+"puzzle.hard6.name" = "Hard 6";
+"puzzle.hard7.name" = "Hard 7";
+
+"game.moves" = "Moves: %d";
+"game.par" = "Par: %d";
+"game.best" = "Best: %d";
+"game.hint" = "Hint";
+"game.undo" = "Undo";
+"game.restart" = "Restart";
+"game.rules" = "Rules";
+"game.selectBlock" = "Tap a block to select it, then swipe to slide it.";
+"game.general" = "Cao Cao";
+
+"win.title" = "Solved!";
+"win.moves" = "You solved it in %d moves.";
+"win.par" = "Par for this puzzle: %d moves.";
+"win.newBest" = "New best score!";
+"win.next" = "Next Puzzle";
+"win.close" = "Close";
+
+"rules.title" = "How to Play";
+"rules.goal.title" = "The Goal";
+"rules.goal.body" = "Slide the large 2×2 block — Cao Cao — down to the exit gap at the bottom of the board. This is the classic Chinese sliding-block puzzle Huarong Dao (华容道), based on the escape of the warlord Cao Cao after the Battle of Red Cliffs in Romance of the Three Kingdoms.";
+"rules.moves.title" = "How to Move";
+"rules.moves.body" = "Tap any block to select it, then swipe in the direction you want to slide it. A block can only move into empty space — no jumping, no rotating.";
+"rules.hint.title" = "Stuck?";
+"rules.hint.body" = "Tap Hint for the next correct move toward a solution. The classic puzzle takes real thought to solve — some solutions need 80+ moves.";
+
+"upgrade.title" = "Klotski Pro";
+"upgrade.subtitle" = "Unlock the full puzzle set.";
+"upgrade.feature1" = "14 more puzzles across Medium and Hard tiers";
+"upgrade.feature2" = "Hint system for every puzzle, including free ones";
+"upgrade.feature3" = "No ads, ever";
+"upgrade.buy" = "Unlock — %@";
+"upgrade.owned" = "You own Klotski Pro ✓";
+"upgrade.restore" = "Restore Purchases";
+"upgrade.notnow" = "Not Now";
+"upgrade.locked.title" = "Unlock with Klotski Pro";

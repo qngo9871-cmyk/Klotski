@@ -1,0 +1,67 @@
+"home.title" = "华容道";
+"home.subtitle" = "曹操突围益智游戏";
+"home.tier.easy" = "简单";
+"home.tier.medium" = "中等";
+"home.tier.hard" = "困难";
+"home.tier.classic" = "经典局";
+"home.locked" = "专业版";
+"home.completed" = "已通关";
+"home.crosssell.title" = "同一开发者出品：象棋巅峰经典版";
+"home.crosssell.body" = "喜欢象棋？试试我们的三国主题策略棋盘游戏。";
+"home.crosssell.cta" = "在 App Store 查看";
+
+"puzzle.classic.name" = "经典局 · 横刀立马";
+"puzzle.easy1.name" = "简单 1";
+"puzzle.easy2.name" = "简单 2";
+"puzzle.easy3.name" = "简单 3";
+"puzzle.easy4.name" = "简单 4";
+"puzzle.medium1.name" = "中等 1";
+"puzzle.medium2.name" = "中等 2";
+"puzzle.medium3.name" = "中等 3";
+"puzzle.medium4.name" = "中等 4";
+"puzzle.medium5.name" = "中等 5";
+"puzzle.medium6.name" = "中等 6";
+"puzzle.medium7.name" = "中等 7";
+"puzzle.hard1.name" = "困难 1";
+"puzzle.hard2.name" = "困难 2";
+"puzzle.hard3.name" = "困难 3";
+"puzzle.hard4.name" = "困难 4";
+"puzzle.hard5.name" = "困难 5";
+"puzzle.hard6.name" = "困难 6";
+"puzzle.hard7.name" = "困难 7";
+
+"game.moves" = "步数：%d";
+"game.par" = "标准步数：%d";
+"game.best" = "最佳：%d";
+"game.hint" = "提示";
+"game.undo" = "撤销";
+"game.restart" = "重新开始";
+"game.rules" = "玩法说明";
+"game.selectBlock" = "点击方块选中，然后滑动方向移动。";
+"game.general" = "曹操";
+
+"win.title" = "通关！";
+"win.moves" = "你用 %d 步完成了这一局。";
+"win.par" = "本局标准步数：%d 步。";
+"win.newBest" = "刷新最佳纪录！";
+"win.next" = "下一局";
+"win.close" = "关闭";
+
+"rules.title" = "玩法说明";
+"rules.goal.title" = "游戏目标";
+"rules.goal.body" = "将最大的 2×2 方块——曹操——滑动到棋盘底部的出口。这是中国传统益智游戏华容道，取材于《三国演义》中曹操赤壁之战后败走华容道的故事。";
+"rules.moves.title" = "怎么玩";
+"rules.moves.body" = "点击任意方块选中它，然后朝想要滑动的方向滑动手指。方块只能滑入空白格，不能跳跃，也不能旋转。";
+"rules.hint.title" = "卡住了？";
+"rules.hint.body" = "点击「提示」查看通往解法的下一步正确走法。经典局需要真正动脑筋——有些解法需要 80 步以上。";
+
+"upgrade.title" = "华容道 专业版";
+"upgrade.subtitle" = "解锁完整关卡。";
+"upgrade.feature1" = "额外 14 关，涵盖中等与困难难度";
+"upgrade.feature2" = "所有关卡（含免费关卡）均可使用提示";
+"upgrade.feature3" = "永久无广告";
+"upgrade.buy" = "解锁 — %@";
+"upgrade.owned" = "你已拥有专业版 ✓";
+"upgrade.restore" = "恢复购买";
+"upgrade.notnow" = "暂不购买";
+"upgrade.locked.title" = "使用专业版解锁";
