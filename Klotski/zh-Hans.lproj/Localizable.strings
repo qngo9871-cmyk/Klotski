@@ -65,3 +65,15 @@
 "upgrade.restore" = "恢复购买";
 "upgrade.notnow" = "暂不购买";
 "upgrade.locked.title" = "使用专业版解锁";
+
+"onboard.welcome.title" = "欢迎来到华容道";
+"onboard.welcome.body" = "中国传统益智游戏华容道——1800 年的历史，如今就在你的手机上。";
+"onboard.goal.title" = "游戏目标";
+"onboard.goal.body" = "将最大的 2×2 方块——曹操——滑动到棋盘底部的出口。这是《三国演义》中曹操赤壁之战后败走华容道的故事。";
+"onboard.moves.title" = "怎么玩";
+"onboard.moves.body" = "点击任意方块选中它，然后朝想要滑动的方向滑动手指。方块只能滑入空白格，不能跳跃，也不能旋转。";
+"onboard.hint.title" = "卡住了？点击提示";
+"onboard.hint.body" = "「提示」会显示通往解法的下一步正确走法。经典局需要真正动脑筋——有些解法需要 80 步以上。";
+"onboard.next" = "下一步";
+"onboard.start" = "开始游戏";
+"onboard.skip" = "跳过";

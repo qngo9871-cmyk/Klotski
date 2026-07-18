@@ -19,6 +19,7 @@
 		7F5A7792EE1F1EEEC83BE3B3 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5749F88344E84B9D1619FAC9 /* Block.swift */; };
 		92404D2D24E3FD76E8F51CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E050EF6FFDB92934285782C2 /* Assets.xcassets */; };
 		B6F6ABC84252989B1D105958 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBFE99F8EF99F2199F9EBDC /* PurchaseManager.swift */; };
+		B72B684054C1DD12F3247692 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6687B3036E6067E5BB51BB4C /* OnboardingView.swift */; };
 		D6C4FC98C3B7115859907B05 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3E3D2DB4C0ED754B74D47 /* Localization.swift */; };
 		D750EA744A38B283E5AE757E /* KlotskiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAB1A35489625C79FF80 /* KlotskiApp.swift */; };
 		DB6DE29377F105ABB7758F76 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFADE876C8903E66DC0583ED /* RulesView.swift */; };
@@ -35,6 +36,7 @@
 		5749F88344E84B9D1619FAC9 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		5DDEAAB1A35489625C79FF80 /* KlotskiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlotskiApp.swift; sourceTree = "<group>"; };
 		6563B302D38107FCB05FE9E3 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
+		6687B3036E6067E5BB51BB4C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		6879E59B504E015B31EF4931 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		837931C0D6FEC057C6E5DB06 /* Klotski.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Klotski.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E8FDB5FAE77B8C298DB714 /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				6563B302D38107FCB05FE9E3 /* BlockView.swift */,
 				C6E7F9531D16CCCC736A1473 /* GameView.swift */,
 				49EDBF1FA09A65F86D264046 /* HomeView.swift */,
+				6687B3036E6067E5BB51BB4C /* OnboardingView.swift */,
 				BFADE876C8903E66DC0583ED /* RulesView.swift */,
 				84E8FDB5FAE77B8C298DB714 /* UpgradeView.swift */,
 			);
@@ -188,6 +191,7 @@
 				4B072756A9B5ECF899A192AD /* HomeView.swift in Sources */,
 				D750EA744A38B283E5AE757E /* KlotskiApp.swift in Sources */,
 				D6C4FC98C3B7115859907B05 /* Localization.swift in Sources */,
+				B72B684054C1DD12F3247692 /* OnboardingView.swift in Sources */,
 				B6F6ABC84252989B1D105958 /* PurchaseManager.swift in Sources */,
 				6ACFB0D2EF2DF49139A3C669 /* Puzzle.swift in Sources */,
 				DB6DE29377F105ABB7758F76 /* RulesView.swift in Sources */,

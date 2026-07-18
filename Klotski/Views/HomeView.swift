@@ -8,6 +8,14 @@ struct HomeView: View {
     @State private var showUpgrade = false
     @State private var game: GameModel = GameModel(puzzle: PuzzleLibrary.puzzle(id: "classic")!)
     @State private var refreshToken = 0
+    @State private var showOnboarding = HomeView.shouldShowOnboarding()
+
+    private static func shouldShowOnboarding() -> Bool {
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["KL_CAPTURE"] != nil { return false }
+        #endif
+        return !UserDefaults.standard.bool(forKey: "hasOnboarded")
+    }
 
     private func isLocked(_ puzzle: Puzzle) -> Bool {
         (puzzle.tier == .medium || puzzle.tier == .hard) && puzzle.id != "classic" && !purchases.isPro
@@ -106,6 +114,12 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showRules) { RulesView() }
             .sheet(isPresented: $showUpgrade) { UpgradeView() }
+            .fullScreenCover(isPresented: $showOnboarding) {
+                OnboardingView {
+                    UserDefaults.standard.set(true, forKey: "hasOnboarded")
+                    showOnboarding = false
+                }
+            }
             .task { await purchases.loadProduct() }
         }
     }

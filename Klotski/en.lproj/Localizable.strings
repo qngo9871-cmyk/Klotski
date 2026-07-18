@@ -65,3 +65,15 @@
 "upgrade.restore" = "Restore Purchases";
 "upgrade.notnow" = "Not Now";
 "upgrade.locked.title" = "Unlock with Klotski Pro";
+
+"onboard.welcome.title" = "Welcome to Klotski";
+"onboard.welcome.body" = "The classic Chinese sliding-block puzzle Huarong Dao (华容道) — 1800 years of history, now on your phone.";
+"onboard.goal.title" = "The Goal";
+"onboard.goal.body" = "Slide the large 2×2 block — Cao Cao — down to the exit gap at the bottom of the board. It's the escape of the warlord Cao Cao after the Battle of Red Cliffs, in Romance of the Three Kingdoms.";
+"onboard.moves.title" = "How to Move";
+"onboard.moves.body" = "Tap any block to select it, then swipe in the direction you want to slide it. A block can only move into empty space — no jumping, no rotating.";
+"onboard.hint.title" = "Stuck? Tap Hint";
+"onboard.hint.body" = "Hint shows the next correct move toward a solution. The classic puzzle needs real thought — some solutions take 80+ moves.";
+"onboard.next" = "Next";
+"onboard.start" = "Let's Play";
+"onboard.skip" = "Skip";
