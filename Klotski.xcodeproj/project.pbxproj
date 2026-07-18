@@ -14,6 +14,7 @@
 		6169379F1602D89D6CD62D7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6879E59B504E015B31EF4931 /* ContentView.swift */; };
 		6610104219BE2D1EB055D8A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52437FE86089A6F3F5A85E3B /* Localizable.strings */; };
 		6ACFB0D2EF2DF49139A3C669 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A437AF0BA9F63038E25F436 /* Puzzle.swift */; };
+		70A54808C5A0F5EDA4BCF831 /* AppEmblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555EBF8F992BC11659B340BA /* AppEmblem.swift */; };
 		71DED7A5293FFB489F92A824 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09CD7F78F392427A3FA20DD /* GameModel.swift */; };
 		7F5A7792EE1F1EEEC83BE3B3 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5749F88344E84B9D1619FAC9 /* Block.swift */; };
 		92404D2D24E3FD76E8F51CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E050EF6FFDB92934285782C2 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		1063530AE7E16007934391D1 /* Solver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solver.swift; sourceTree = "<group>"; };
 		3CBFE99F8EF99F2199F9EBDC /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		49EDBF1FA09A65F86D264046 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		555EBF8F992BC11659B340BA /* AppEmblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEmblem.swift; sourceTree = "<group>"; };
 		5749F88344E84B9D1619FAC9 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		5DDEAAB1A35489625C79FF80 /* KlotskiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlotskiApp.swift; sourceTree = "<group>"; };
 		6563B302D38107FCB05FE9E3 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 		2F1C06A0C067FE879011566C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				555EBF8F992BC11659B340BA /* AppEmblem.swift */,
 				6563B302D38107FCB05FE9E3 /* BlockView.swift */,
 				C6E7F9531D16CCCC736A1473 /* GameView.swift */,
 				49EDBF1FA09A65F86D264046 /* HomeView.swift */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70A54808C5A0F5EDA4BCF831 /* AppEmblem.swift in Sources */,
 				7F5A7792EE1F1EEEC83BE3B3 /* Block.swift in Sources */,
 				E7DB7BDBD53739B099BA754D /* BlockView.swift in Sources */,
 				E02D6CDD3BE4741560D9978D /* Board.swift in Sources */,

@@ -10,7 +10,7 @@ struct UpgradeView: View {
                 LinearGradient(colors: [Color(red: 0.15, green: 0.05, blue: 0.05), .black],
                                 startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 VStack(spacing: 22) {
-                    Text("🧩").font(.system(size: 50))
+                    AppEmblem(size: 50)
                     Text(L("upgrade.title")).font(.title.bold()).foregroundStyle(.white)
                     Text(L("upgrade.subtitle")).font(.subheadline).foregroundStyle(.white.opacity(0.75))
                         .multilineTextAlignment(.center).padding(.horizontal, 30)

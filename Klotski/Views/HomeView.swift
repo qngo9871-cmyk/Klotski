@@ -52,7 +52,7 @@ struct HomeView: View {
             List {
                 Section {
                     VStack(spacing: 6) {
-                        Text("🧩").font(.system(size: 48))
+                        AppEmblem(size: 48)
                         Text(L("home.title")).font(.system(size: 30, weight: .heavy, design: .rounded))
                         Text(L("home.subtitle")).font(.subheadline).foregroundStyle(.secondary)
                     }
