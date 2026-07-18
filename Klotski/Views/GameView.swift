@@ -10,6 +10,7 @@ struct GameView: View {
     // so the Hint button would show "locked" forever even once isPro becomes true.
     // Caught by visually inspecting a screenshot, not by the build succeeding.
     @ObservedObject private var purchases = PurchaseManager.shared
+    @State private var showRules = false
 
     var body: some View {
         ZStack {
@@ -42,10 +43,16 @@ struct GameView: View {
             ToolbarItem(placement: .principal) {
                 Text(L(game.puzzle.nameKey)).font(.headline).foregroundStyle(.white)
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button { showRules = true } label: {
+                    Image(systemName: "questionmark.circle").foregroundStyle(.white)
+                }
+            }
         }
         .sheet(isPresented: $game.showWinSheet) {
             WinSheet(game: game)
         }
+        .sheet(isPresented: $showRules) { RulesView() }
     }
 
     private var header: some View {
