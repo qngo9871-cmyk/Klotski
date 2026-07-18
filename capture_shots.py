@@ -125,7 +125,7 @@ def main():
             subprocess.run(["xcrun", "simctl", "launch", DEVICE, BUNDLE],
                            env=dict(os.environ, SIMCTL_CHILD_KL_CAPTURE=cap, SIMCTL_CHILD_KL_LANG=lang),
                            capture_output=True)
-            time.sleep(2)
+            time.sleep(4)
             sh("xcrun", "simctl", "io", DEVICE, "screenshot", str(raw))
             compose(raw, headline, out / f"{shotname}.png", is_cjk=is_cjk)
     raw.unlink(missing_ok=True)
