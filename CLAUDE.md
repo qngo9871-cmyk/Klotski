@@ -7,9 +7,10 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
-**Status as of 2026-07-18: built, metadata/scripts ready, blocked on Q's manual
-"+ New App" ASC click.** See memory for current state before assuming anything here
-is stale.
+**Status: 🟢 SUBMITTED, WAITING_FOR_REVIEW (2026-07-18).** App id `6792362495`, build 3
+(with onboarding + in-game help button), releaseType `AFTER_APPROVAL` (auto-release).
+See memory (`project_klotski_huarong_dao`) for current state before assuming anything
+here is stale.
 
 ## What this is
 
