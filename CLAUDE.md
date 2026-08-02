@@ -7,10 +7,17 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
-**Status: 🟢 SUBMITTED, WAITING_FOR_REVIEW (2026-07-18).** App id `6792362495`, build 3
-(with onboarding + in-game help button), releaseType `AFTER_APPROVAL` (auto-release).
-See memory (`project_klotski_huarong_dao`) for current state before assuming anything
-here is stale.
+**Status: 🟢 LIVE since 2026-07-18 (v1.0.0). v1.0.1 SUBMITTED, WAITING_FOR_REVIEW
+(2026-08-02).** App id `6792362495`, releaseType `AFTER_APPROVAL` (auto-release).
+
+**Bug found + fixed 2026-08-02: `klotski.pro` was never actually purchasable.**
+Same root cause as Sam Loc (see that app's CLAUDE.md and
+`[[feedback_iap_must_ride_with_first_version_submission]]`) — the IAP was
+configured but never attached to a review submission, so it sat at
+`READY_TO_SUBMIT` since launch while the app itself was `READY_FOR_SALE`.
+Fixed by bumping to v1.0.1 (build 4), ticking the IAP into a new draft
+submission via the ASC web UI, then attaching the new version via API and
+submitting both together — now `WAITING_FOR_REVIEW`.
 
 ## What this is
 
