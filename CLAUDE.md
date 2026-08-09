@@ -7,8 +7,72 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
-**Status: 🟢 LIVE since 2026-07-18 (v1.0.0). v1.0.1 SUBMITTED, WAITING_FOR_REVIEW
-(2026-08-02).** App id `6792362495`, releaseType `AFTER_APPROVAL` (auto-release).
+**Status (2026-08-09): 🟡 Account-level Guideline 5.6 "Review Suspended" hold —
+part of a 19-app burst-submission flag, NOT a per-app bug. Resubmission is
+HARD-BLOCKED until 2026-08-18. v1.0.2 (build 5) is a genuine quality pass done
+ahead of the window reopening — ready for resubmission once Apple lifts the hold,
+NOT submitted yet.** App id `6792362495`, releaseType `AFTER_APPROVAL`.
+Previously: LIVE since 2026-07-18 (v1.0.0); v1.0.1 fixed the IAP-never-attached
+bug below and was WAITING_FOR_REVIEW as of 2026-08-02 when the 5.6 hold hit.
+
+## Pre-resubmission quality review (2026-08-09)
+
+Full local review ahead of the 2026-08-18 resubmission window — no ASC/App Store
+Connect access, code/build/git only. Summary: this app was already in genuinely
+good shape (unlike some others in the same 19-app wave); review mostly
+*confirmed* correctness and added one real differentiation pass rather than
+fixing a stub.
+
+- **Build**: `xcodegen generate` + clean Debug build for iOS Simulator —
+  **0 warnings, 0 errors**.
+- **Puzzle logic independently re-verified, not just trusted from prior claims.**
+  Wrote a standalone Python BFS (`Board`/`Solver` ported 1:1, including the
+  kind-not-id `stateKey`) and ran it against all 19 baked-in `Puzzle.swift`
+  layouts: every puzzle is solvable, and the true BFS-optimal move count
+  matches the claimed `minMoves`/"par" for all 19, no mismatches. No overlaps,
+  no out-of-bounds start positions. Win detection (`Board.isSolved`) and the
+  Swift `Solver` logic read correctly against the model.
+- **isPro gating re-checked**: still correctly `@ObservedObject`-based
+  everywhere (`GameView`, `HomeView`, `UpgradeView`) — no reintroduction of the
+  2026-08-02 bug, no double-gating pattern found. `#if DEBUG isPro = true` is
+  intentional (lets Debug builds test Pro features) and is the only DEBUG
+  branch touching entitlement state.
+- **No TODO/FIXME/placeholder/Lorem-ipsum/dev-only text found** anywhere in
+  `Klotski/` (grepped the whole target).
+- **Onboarding confirmed real and working**: 4-page first-launch flow
+  (`OnboardingView`) plus an always-reachable "Rules" sheet from both Home and
+  in-game — walked both via simulator screenshots, both languages.
+- **Bilingual localization confirmed real and complete**: `en`/`zh-Hans`
+  `.lproj` string tables are in 1:1 key parity, hand-written (not
+  machine-translated tells), and every screen was visually walked in both
+  languages via simulator screenshots — no untranslated/English-leaking strings
+  found in the zh-Hans build.
+- **Fixed**: `capture_shots.py` had a stale `APP_DIR = Path("/Users/user/Klotski")`
+  hardcoded macOS-account path left over from the pre-mac-mini machine — dev
+  tooling only (screenshot capture script), not shipped in the app, but it was
+  silently broken on this machine. Now resolves `Path(__file__).resolve().parent`
+  so it works regardless of account/home path.
+- **Differentiation added (small, scoped — not a redesign)**: the four 1×2
+  "vertical" blocks and the 2×1 "horizontal" block previously all rendered with
+  the same generic "將" label. Real Huarong Dao sets name these pieces — now
+  `BlockView` labels them individually and *stably* by `block.id` (id 1 = 關
+  Guan Yu, the traditional exit-guard; ids 2–5 = 張飞/趙云/馬超/黃忠, the four
+  generals). This is purely cosmetic — `Board.stateKey` still dedupes by
+  `(kind, position)`, so solver/BFS correctness is untouched; verified by
+  rebuilding and re-running the independent BFS check above. Added a matching
+  "The Pieces" section to `RulesView` (`rules.pieces.title`/`.body`, both
+  locales) explaining the naming, tying the mechanic more explicitly to the
+  Three Kingdoms story the app already tells.
+- **Not changed / left alone**: three small dead Localizable.strings keys
+  (`win.next`, `upgrade.locked.title`, `home.completed`) are defined in both
+  locales but referenced nowhere in Swift — harmless, left as-is rather than
+  risk an unrelated edit during a review pass.
+- **Version bump**: `MARKETING_VERSION` 1.0.1 → **1.0.2**, `CURRENT_PROJECT_VERSION`
+  4 → **5** (`project.yml`, both the top-level default and the target override).
+
+**Open items / needs owner decision**: none blocking. The only owner-facing
+question is timing — this build is ready to archive/upload/submit as soon as
+the 2026-08-18 Guideline 5.6 hold lifts; do not submit before then.
 
 **Bug found + fixed 2026-08-02: `klotski.pro` was never actually purchasable.**
 Same root cause as Sam Loc (see that app's CLAUDE.md and

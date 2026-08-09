@@ -6,7 +6,7 @@ import os, re, subprocess, sys, time
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-APP_DIR = Path("/Users/user/Klotski")
+APP_DIR = Path(__file__).resolve().parent
 PROJECT = APP_DIR / "Klotski.xcodeproj"
 SCHEME = "Klotski"
 BUNDLE = "com.quyenngo.klotski"

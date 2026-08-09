@@ -14,10 +14,26 @@ struct BlockView: View {
         }
     }
 
+    /// Traditional Huarong Dao piece names — the 2×1 "horizontal" block is always
+    /// Guan Yu (關羽), who blocks Cao Cao's escape route in the legend, and the
+    /// four 1×2 "vertical" blocks are the four other generals guarding the board
+    /// (Zhang Fei, Zhao Yun, Ma Chao, Huang Zhong). Labeling them individually
+    /// (keyed by block.id, which is stable across every puzzle layout) instead of
+    /// a generic repeated "將" is closer to the real game and to the Three
+    /// Kingdoms story this app already tells in Rules/Onboarding — purely
+    /// cosmetic, doesn't touch Board.stateKey or solver logic.
     private var label: String {
         switch block.kind {
         case .general: return "帥"
-        case .horizontal, .vertical: return "將"
+        case .horizontal: return "關"
+        case .vertical:
+            switch block.id {
+            case 2: return "張"
+            case 3: return "趙"
+            case 4: return "馬"
+            case 5: return "黃"
+            default: return "將"
+            }
         case .soldier: return "卒"
         }
     }

@@ -8,6 +8,7 @@ struct RulesView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     section(titleKey: "rules.goal.title", bodyKey: "rules.goal.body")
+                    section(titleKey: "rules.pieces.title", bodyKey: "rules.pieces.body")
                     section(titleKey: "rules.moves.title", bodyKey: "rules.moves.body")
                     section(titleKey: "rules.hint.title", bodyKey: "rules.hint.body")
                 }
