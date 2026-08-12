@@ -7,11 +7,14 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
-**Status (2026-08-09): 🟡 Account-level Guideline 5.6 "Review Suspended" hold —
+**Status (2026-08-12): 🟡 Account-level Guideline 5.6 "Review Suspended" hold —
 part of a 19-app burst-submission flag, NOT a per-app bug. Resubmission is
-HARD-BLOCKED until 2026-08-18. v1.0.2 (build 5) is a genuine quality pass done
-ahead of the window reopening — ready for resubmission once Apple lifts the hold,
-NOT submitted yet.** App id `6792362495`, releaseType `AFTER_APPROVAL`.
+HARD-BLOCKED until 2026-08-18 and scheduled for batch 3 (2026-08-25) per
+`app-store-rejections/NOTES.md`. v1.0.3 (build 6) is a second, deeper polish pass
+(stale marketing screenshots recaptured to show the 08-09 differentiation feature,
+ASO keywords refreshed) — ready for resubmission once Apple lifts the hold and
+the batch date arrives, NOT submitted yet.** App id `6792362495`, releaseType
+`AFTER_APPROVAL`.
 Previously: LIVE since 2026-07-18 (v1.0.0); v1.0.1 fixed the IAP-never-attached
 bug below and was WAITING_FOR_REVIEW as of 2026-08-02 when the 5.6 hold hit.
 
@@ -73,6 +76,77 @@ fixing a stub.
 **Open items / needs owner decision**: none blocking. The only owner-facing
 question is timing — this build is ready to archive/upload/submit as soon as
 the 2026-08-18 Guideline 5.6 hold lifts; do not submit before then.
+
+## Polish pass (2026-08-12)
+
+Second, deeper pre-resubmission pass (this app resubmits in batch 3, 2026-08-25 per
+`app-store-rejections/NOTES.md`). Re-verified the 08-09 findings still hold (onboarding,
+localization, isPro gating — all still solid, no code changes needed there) and went
+looking for real polish problems rather than re-doing the full code audit.
+
+- **Build**: clean `xcodegen generate` + `xcodebuild build` for iOS Simulator (iPhone 17
+  Pro) — **0 errors, 0 real warnings** (only the standard benign
+  `appintentsmetadataprocessor` "no AppIntents.framework dependency" tooling note, not a
+  code warning).
+- **Real bug found + fixed: stale marketing screenshots missing a shipped feature.**
+  `screenshots/final/{en,zh-Hans}/*.png` were all dated 2026-07-18, but `RulesView.swift`
+  was last changed 2026-08-09 (the differentiation pass that added the "The Pieces"/棋子说明
+  section naming the Three Kingdoms generals). The screenshots — including the Rules shot
+  specifically meant to sell that differentiation — still showed the pre-08-09 UI: generic
+  "將" labels on every vertical block in the gameplay shot, and only 3 Rules sections (Goal/
+  Move/Stuck) instead of 4. Same class of bug independently found in Bát Tự this same
+  session (stale screenshots missing the zodiac-animal feature). Fixed by re-running
+  `capture_shots.py` (real in-app UI, not mockups) against the current build. Verified by
+  reading the new PNGs directly, before and after: the regenerated `02-classic.png` now
+  shows the individually-named pieces (張/趙/馬/黃 visible on-board), and `05-rules.png`
+  / `zh-Hans` `05-rules.png` now include the "The Pieces"/"棋子说明" section in both
+  languages. No SwiftUI layout bug found this pass (the Upgrade/paywall screen's vertical
+  spacing, which looked sparse at first glance, is actually a normal ZStack-centered modal
+  layout with roughly symmetric top/bottom padding — not the top-hugging/dead-gap bug class
+  seen in other apps this wave; left alone).
+- **ASO/keywords refreshed** (description and promotional text were already strong/
+  compelling from the original build — left unchanged): dropped keyword tokens fully
+  redundant with the indexed app name/subtitle ("klotski", "huarong dao", "cao cao puzzle",
+  "sliding block" — all substrings of "Klotski - Huarong Dao Puzzle" / "Slide the Cao Cao
+  Block Out" and therefore already indexed for free) and added non-redundant high-value
+  search terms: **en-US** now `sliding puzzle,chinese puzzle,three kingdoms,logic
+  puzzle,brain teaser,strategy,offline game` (92/100 chars, was 89/100 of largely redundant
+  terms). **zh-Hans** dropped `华容道`/`曹操` (both already in the Chinese app name) and added
+  `逻辑游戏,单机游戏,智力游戏`, now `klotski,三国,推箱子,滑块拼图,益智游戏,横刀立马,逻辑游戏,
+  单机游戏,智力游戏` (44/100 chars, was 36/100).
+- **Pushed live via `~/asc-tools/asc_push_klotski.py`** (safe — app not public, only
+  metadata/keyword changes, no submit). Confirmed via `asc_inspect_listing.py` that the
+  editable v1.0.1 (REJECTED) localization now shows the new keyword strings for both
+  locales.
+- **Fixed 3 real bugs found in `asc_push_klotski.py` and `asc_push_klotski_screenshots.py`
+  while running them** (pre-existing, unrelated to this app's own code, but were silently
+  blocking metadata pushes):
+  1. `find_app_info` picked the app's `READY_FOR_DISTRIBUTION` appInfo over its `REJECTED`
+     one by iteration order — the former 409s on every attribute PATCH (name/subtitle/
+     categories all locked) once a REJECTED version exists; now prioritizes REJECTED-family
+     states first.
+  2. `find_or_create_version` unconditionally force-renamed whatever editable version it
+     found back to `"1.0.0"` — correct only for the very first bootstrap run, but now that
+     the app has shipped past 1.0.0 this 409s ("version number has been previously used").
+     This script only pushes text metadata; versionString/releaseType are owned by the
+     Xcode/`project.yml` build+upload pattern and must never be touched here (also matters
+     because `releaseType` must stay `AFTER_APPROVAL`, per the standing ASC rule — the old
+     code was silently forcing it to `MANUAL`). Now leaves both alone entirely.
+  3. `asc_push_klotski_screenshots.py` had the same stale `/Users/user/Klotski` pre-mac-mini
+     path bug as `capture_shots.py` had (fixed 08-09) — never actually fixed here, so the
+     screenshot push always silently no-op'd (found 0 files, skipped). Now resolves
+     `Path.home() / "Projects" / "Klotski"`, matching every other app's push script.
+  Also wrapped the (already-approved, unmodifiable) IAP localization PATCH and the appInfo
+  category PATCH in try/except so a legitimate 409 on an already-correct/locked field
+  doesn't abort the rest of the push — confirmed both scripts now exit 0 end-to-end.
+- **Screenshots re-pushed** via the now-fixed `asc_push_klotski_screenshots.py` — confirmed
+  "uploaded"/"order set" for all 5 shots × 2 locales, exit code 0.
+- **Version bump**: `MARKETING_VERSION` 1.0.2 → **1.0.3**, `CURRENT_PROJECT_VERSION` 5 →
+  **6** (`project.yml`, both the top-level default and target override). Rebuilt clean
+  after the bump: BUILD SUCCEEDED, 0 warnings.
+- **Not changed**: description/promotional text (already compelling, well-structured, no
+  generic filler); onboarding, localization, isPro gating (all re-checked, no regressions
+  since 08-09).
 
 **Bug found + fixed 2026-08-02: `klotski.pro` was never actually purchasable.**
 Same root cause as Sam Loc (see that app's CLAUDE.md and
