@@ -157,6 +157,23 @@ Fixed by bumping to v1.0.1 (build 4), ticking the IAP into a new draft
 submission via the ASC web UI, then attaching the new version via API and
 submitting both together — now `WAITING_FOR_REVIEW`.
 
+## Build staged for resubmission (2026-08-13)
+
+Archived, exported, and uploaded a Release build ahead of the staggered resubmission — still
+blocked until 2026-08-18 by the Guideline 5.6 account-level hold, this app resubmits
+**2026-08-25** (batch 3). Build **1.0.3 (6)** uploaded via
+`xcrun altool --upload-app` (Delivery UUID `51cd5142-3b1e-45f1-a5e4-f17fca3dc801`), processed to `VALID` by Apple, and
+attached to the existing `REJECTED` appStoreVersion (id `1c41d617-e5f5-4a6a-84d9-418603b6e051`) via a direct
+`PATCH appStoreVersions/{id}/relationships/build` API call — independently re-verified via a
+follow-up `GET` on the same relationship, not just trusted from the PATCH's 204 response.
+
+**Deliberately NOT done yet** — waiting for the user's explicit go-ahead on this app's
+scheduled date, per the staggered resubmission plan:
+1. Tick the Pro IAP into this version in the App Store Connect **web UI** — the API has no
+   way to do this; it must be done from the version's own page (not the IAP's own page, which
+   creates an orphaned draft submission — a mistake this portfolio hit once before).
+2. Submit for review.
+
 ## What this is
 
 - 4×5 grid, 10 fixed blocks (one 2×2 "Cao Cao" general, one 2×1 horizontal, four
