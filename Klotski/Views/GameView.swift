@@ -154,7 +154,7 @@ struct GameView: View {
             }
 
             Button {
-                if purchases.isPro {
+                if purchases.hasFullAccess {
                     game.requestHint()
                 } else {
                     game.showWinSheet = false
@@ -165,7 +165,7 @@ struct GameView: View {
                     if game.isComputingHint {
                         ProgressView().tint(.white)
                     } else {
-                        Image(systemName: purchases.isPro ? "lightbulb.fill" : "lock.fill")
+                        Image(systemName: purchases.hasFullAccess ? "lightbulb.fill" : "lock.fill")
                     }
                     Text(L("game.hint")).font(.caption2)
                 }

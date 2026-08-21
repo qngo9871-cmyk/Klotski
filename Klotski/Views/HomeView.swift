@@ -17,8 +17,13 @@ struct HomeView: View {
         return !UserDefaults.standard.bool(forKey: "hasOnboarded")
     }
 
+    // No permanently-free tier: during an active trial (or with Pro), every
+    // puzzle is unlocked. Once the trial elapses and isPro is still false,
+    // EVERYTHING locks, including Classic and the four Easy puzzles that used
+    // to be free forever — the old "medium/hard except classic" exemption was
+    // the standing-rule violation this fixes.
     private func isLocked(_ puzzle: Puzzle) -> Bool {
-        (puzzle.tier == .medium || puzzle.tier == .hard) && puzzle.id != "classic" && !purchases.isPro
+        !purchases.hasFullAccess
     }
 
     private func tap(_ puzzle: Puzzle) {
@@ -67,6 +72,23 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .listRowBackground(Color.clear)
+                }
+
+                if !purchases.isPro {
+                    Section {
+                        Button { showUpgrade = true } label: {
+                            HStack {
+                                Image(systemName: purchases.trialActive ? "clock.fill" : "lock.fill")
+                                Text(purchases.trialActive
+                                     ? String(format: L("home.trial.active"), purchases.trialDaysRemaining)
+                                     : L("home.trial.ended"))
+                                    .font(.footnote.bold())
+                                Spacer()
+                                Text(L("upgrade.title")).font(.caption).foregroundStyle(.secondary)
+                            }
+                        }
+                        .foregroundStyle(purchases.trialActive ? Color.primary : Color.red)
+                    }
                 }
 
                 Section(L("home.tier.classic")) {

@@ -6,6 +6,8 @@
 "home.tier.classic" = "The Classic";
 "home.locked" = "Pro";
 "home.completed" = "Solved";
+"home.trial.active" = "Free trial — %d day(s) left. Every puzzle is unlocked.";
+"home.trial.ended" = "Your free trial has ended. Unlock Klotski Pro to keep playing.";
 "home.crosssell.title" = "From the makers of ChineseChess Pro Classic";
 "home.crosssell.body" = "Enjoy Xiangqi? Try our Three Kingdoms strategy board game.";
 "home.crosssell.cta" = "View on the App Store";
@@ -59,8 +61,9 @@
 
 "upgrade.title" = "Klotski Pro";
 "upgrade.subtitle" = "Unlock the full puzzle set.";
-"upgrade.feature1" = "14 more puzzles across Medium and Hard tiers";
-"upgrade.feature2" = "Hint system for every puzzle, including free ones";
+"upgrade.subtitle.trialEnded" = "Your 7-day free trial has ended. Unlock Klotski Pro to keep playing every puzzle.";
+"upgrade.feature1" = "All 19 puzzles, every tier — Easy through Hard";
+"upgrade.feature2" = "Hint system for every puzzle";
 "upgrade.feature3" = "No ads, ever";
 "upgrade.buy" = "Unlock — %@";
 "upgrade.owned" = "You own Klotski Pro ✓";

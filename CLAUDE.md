@@ -18,6 +18,57 @@ the batch date arrives, NOT submitted yet.** App id `6792362495`, releaseType
 Previously: LIVE since 2026-07-18 (v1.0.0); v1.0.1 fixed the IAP-never-attached
 bug below and was WAITING_FOR_REVIEW as of 2026-08-02 when the 5.6 hold hit.
 
+## No-permanently-free-tier fix (2026-08-22)
+
+Standing portfolio rule set 2026-08-18 (`feedback_no_permanent_free_tier_trials_only`):
+no app may offer any content/mode/feature free forever — only a few free credits, or a
+7-day time-limited trial for open-ended-use apps. Klotski was still violating this: the
+free/paid split was **Classic + all 4 Easy puzzles free forever, unlimited replays**
+(not gated by any clock), with only the 7 Medium + 7 Hard puzzles (14 of 19 total) and
+the BFS hint system requiring Pro via a permanent `!purchases.isPro` check in
+`HomeView.isLocked(_:)`. (The prior description of this bug as "Hard, 6 excluding
+classic" was off by one — it's 7 Hard puzzles, `hard1`–`hard7`, plus Classic itself is
+tier `.hard` but was separately exempted by id.) This was the same forever-free-tier
+gap already fixed across 19 other apps in the 2026-08-18 rollout; Klotski was missed
+because its free content wasn't literally an unlocked "mode," just a permanently-free
+puzzle subset, which didn't get caught by the original sweep.
+
+Fixed by porting the exact trial-clock pattern from `SamLoc/Core/PurchaseManager.swift`:
+- `Core/PurchaseManager.swift` — added `@Published var trialActive`, `trialDaysRemaining`
+  (ceil'd days left, floors at 0), a `firstLaunchDate` UserDefaults-backed 7-day clock,
+  `evaluateTrialStatus()` (called from `init()`, additive only — no existing
+  purchase/entitlement logic touched), and a computed `hasFullAccess: Bool { isPro ||
+  trialActive }` — the one gate every view should read now instead of `isPro` directly.
+  Existing installs upgrading from the old build have no stored `firstLaunchDate`, so
+  they start a fresh 7-day clock on first launch under this build rather than being
+  locked out immediately.
+- `Views/HomeView.swift` — `isLocked(_:)` no longer special-cases Classic/Easy by id;
+  it's now just `!purchases.hasFullAccess`, so during the trial every tier is unlocked
+  and once the trial ends (and isPro is false) every tier locks, Classic and Easy
+  included. Added a trial-status banner row under the title (clock icon + "Free trial —
+  N day(s) left" while active, tapping through to `UpgradeView`; red lock icon + "trial
+  ended" copy once expired).
+- `Views/GameView.swift` — hint-button gate changed from `purchases.isPro` to
+  `purchases.hasFullAccess` (both the tap action and the lightbulb/lock icon), so hints
+  work during the trial too, not just for paid Pro.
+- `Views/UpgradeView.swift` — subtitle now reads the normal "unlock the full puzzle set"
+  copy while the trial is still running, and trial-specific "your 7-day free trial has
+  ended" copy once it's expired. `upgrade.feature1` copy corrected from "14 more
+  puzzles" (no longer true — now it's all 19) to "All 19 puzzles, every tier."
+- `en.lproj` / `zh-Hans.lproj` `Localizable.strings` — added `home.trial.active`,
+  `home.trial.ended`, `upgrade.subtitle.trialEnded` (both locales, hand-written matching
+  existing tone, not machine-translated), updated `upgrade.feature1`/`feature2` text to
+  match the new all-content-gated reality.
+- Verified: `xcodegen generate` + clean `xcodebuild build` for iOS Simulator —
+  **0 errors, 0 real warnings** (only the standard benign `appintentsmetadataprocessor`
+  tooling note).
+- **Not done / deliberately out of scope this pass**: no archive/export/upload, no ASC
+  metadata push, no submission — this app is still under the account-level Guideline 5.6
+  hold (batch 3, scheduled 2026-08-25) and this was a code-only fix per instruction. The
+  next resubmission build (whenever the user gives the go-ahead) should bump
+  `MARKETING_VERSION`/`CURRENT_PROJECT_VERSION` in `project.yml` to carry this fix, same
+  as every other version bump in this file.
+
 ## Pre-resubmission quality review (2026-08-09)
 
 Full local review ahead of the 2026-08-18 resubmission window — no ASC/App Store
@@ -187,9 +238,11 @@ scheduled date, per the staggered resubmission plan:
   produce "hard" puzzles).
 - Move counter, undo, per-puzzle best-score tracking (UserDefaults), and a live
   BFS-powered hint button (same solver, off the main thread).
-- StoreKit 2 non-consumable IAP `com.quyenngo.klotski.pro` ($2.99) — free tier is
-  the Classic + 4 Easy puzzles; Pro unlocks the 7 Medium + 7 Hard puzzles AND the
-  hint system for every puzzle including free ones.
+- StoreKit 2 non-consumable IAP `com.quyenngo.klotski.pro` ($2.99). No permanently-free
+  tier (fixed 2026-08-22, see that section below): a 7-day trial unlocks everything —
+  all 19 puzzles across every tier, plus the hint system. Once the trial ends, everything
+  locks (including Classic and the 4 Easy puzzles, which used to stay free forever)
+  until Pro is purchased.
 - **True bilingual in-app UI** (English + Simplified Chinese) — same
   `LocalizationManager` bundle-swap architecture as the Sâm Lốc app, live in-app
   language switch, hand-written strings both locales (not machine-translated).

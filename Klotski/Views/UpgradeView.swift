@@ -12,7 +12,8 @@ struct UpgradeView: View {
                 VStack(spacing: 22) {
                     AppEmblem(size: 50)
                     Text(L("upgrade.title")).font(.title.bold()).foregroundStyle(.white)
-                    Text(L("upgrade.subtitle")).font(.subheadline).foregroundStyle(.white.opacity(0.75))
+                    Text(purchases.trialActive ? L("upgrade.subtitle") : L("upgrade.subtitle.trialEnded"))
+                        .font(.subheadline).foregroundStyle(.white.opacity(0.75))
                         .multilineTextAlignment(.center).padding(.horizontal, 30)
 
                     VStack(alignment: .leading, spacing: 12) {
