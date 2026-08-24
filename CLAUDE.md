@@ -7,6 +7,28 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
+**2026-08-24 — v1.0.4 (build 7), DEBUG bug fix, SUBMITTED.** Found by the new portfolio-wide
+`~/asc-tools/compliance_gate.py`: `PurchaseManager.updateEntitlementStatus()`'s DEBUG branch
+had a bare `isPro = true` (previously — wrongly — documented in the 2026-08-09 review below
+as "intentional"), the same double-gating bug already fixed in SamLoc/Fanorona/Dara/
+Surakarta. Fixed with the same capture-mode-exempted pattern: `isPro = KL_CAPTURE != nil &&
+KL_CAPTURE != "home" && KL_CAPTURE != "upgrade"`. Verified clean build and the real trial/
+locked state now shows correctly on a fresh install (previously invisible in every DEBUG
+build/screenshot). The old `UNRESOLVED_ISSUES` reviewSubmission from the original 2026-08-02
+5.6 rejection was still blocking new submissions — canceled it (not deleted, per
+[[asc-resubmit-after-rejection]]) to free the version, corrected the version record's
+long-mismatched `versionString` (was stuck at "1.0.1" vs. the real 1.0.4), attached the new
+build, and submitted. **Found a real, separate, pre-existing issue while doing this**: the
+Pro IAP (`com.quyenngo.klotski.pro`) is in `READY_TO_SUBMIT` state, meaning it may have
+never actually ridden an approved submission — same failure class as the 2026-08-09
+IAP-never-submitted incident. Attaching an IAP to a review is web-UI-only (not API-
+accessible), so this submission went out without it — **deliberately, per user decision, to
+not block the code fix; the IAP purchasability question is a separate follow-up**, see
+memory `project_klotski_iap_readytosubmit_investigation`. **SUBMITTED, WAITING_FOR_REVIEW**
+— app `6792362495`, version `1.0.4` (id `1c41d617-e5f5-4a6a-84d9-418603b6e051`), build
+`7`/`f9a77079-8eb2-452d-a47f-946e39aa6a31` attached, reviewSubmission
+`86819596-bb10-40c9-abcd-556f3cac4d80`.
+
 **Status (2026-08-12): 🟡 Account-level Guideline 5.6 "Review Suspended" hold —
 part of a 19-app burst-submission flag, NOT a per-app bug. Resubmission is
 HARD-BLOCKED until 2026-08-18 and scheduled for batch 3 (2026-08-25) per
