@@ -34,12 +34,25 @@ struct UpgradeView: View {
                             } else if let product = purchases.product {
                                 Text(String(format: L("upgrade.buy"), product.displayPrice))
                                     .font(.title3.bold()).frame(maxWidth: 260).padding()
+                            } else if isCaptureScreenshotFallback {
+                                // App Store screenshot capture only: local StoreKit testing
+                                // consistently fails to load a real Product via a bare
+                                // `simctl launch` (no Xcode test host attached) — same known
+                                // limitation as Janggi/Dara/Makruk/OAnQuan. Unlike those
+                                // apps this view had no fallback UI at all when `product`
+                                // stays nil, so the paywall screenshot was stuck on a
+                                // permanent spinner regardless of wait time (found via
+                                // vision QA, 2026-08-24). Renders the real, shipping button
+                                // copy/price instead — never shown to a real user, gated on
+                                // both #if DEBUG and the KL_CAPTURE screenshot launch arg.
+                                Text(String(format: L("upgrade.buy"), "$2.99"))
+                                    .font(.title3.bold()).frame(maxWidth: 260).padding()
                             } else {
                                 ProgressView().tint(.white)
                             }
                         }
                         .buttonStyle(.borderedProminent).tint(.red)
-                        .disabled(purchases.isPurchasing || purchases.product == nil)
+                        .disabled(purchases.isPurchasing || (purchases.product == nil && !isCaptureScreenshotFallback))
 
                         Button(L("upgrade.restore")) { Task { await purchases.restorePurchases() } }
                             .font(.footnote).foregroundStyle(.white.opacity(0.6))
@@ -56,6 +69,14 @@ struct UpgradeView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
+    }
+
+    private var isCaptureScreenshotFallback: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.environment["KL_CAPTURE"] == "upgrade"
+        #else
+        false
+        #endif
     }
 
     private func featureRow(_ icon: String, _ text: String) -> some View {

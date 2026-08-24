@@ -7,6 +7,22 @@ that first for the full history (why this puzzle, the incumbent teardown showing
 mislabeled/miscategorized 776-rating leader, naming/ASO research, and the
 ChineseChess Pro Classic cross-sell rationale).
 
+**2026-08-24 (later same day) — vision QA found the v1.0.4 submission's own paywall
+screenshot is stale AND the UpgradeView had a separate real bug of its own.**
+`screenshots/final/{en,zh-Hans}/04-upgrade.png` predated today's DEBUG isPro fix and
+showed "You own Klotski Pro ✓" instead of a buy button — same stale-screenshot class as
+BauCua. Recapturing (after adding `simctl erase` + an 8s settle wait to
+`capture_shots.py`, same fix as elsewhere) surfaced a second, previously-hidden bug:
+unlike OAnQuan/Makruk, `Views/UpgradeView.swift` had **no fallback UI at all** when
+`purchases.product` stays nil — it showed a permanent spinner forever (StoreKit
+reliably fails to resolve a product under a bare `simctl launch`, a known limitation
+across this portfolio), not just a slow-to-resolve one. Added the same DEBUG-only
+`isCaptureScreenshotFallback` pattern used in OAnQuan/Makruk to render the real
+"Unlock — $2.99" button copy when `KL_CAPTURE == "upgrade"` and product load has
+failed. Recaptured and verified both locales now show the correct button.
+**Not yet pushed to ASC** — v1.0.4 is `WAITING_FOR_REVIEW`; whether its screenshots can
+still be updated mid-review needs the user's call.
+
 **2026-08-24 — v1.0.4 (build 7), DEBUG bug fix, SUBMITTED.** Found by the new portfolio-wide
 `~/asc-tools/compliance_gate.py`: `PurchaseManager.updateEntitlementStatus()`'s DEBUG branch
 had a bare `isPro = true` (previously — wrongly — documented in the 2026-08-09 review below
