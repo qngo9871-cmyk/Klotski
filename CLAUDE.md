@@ -20,8 +20,18 @@ across this portfolio), not just a slow-to-resolve one. Added the same DEBUG-onl
 `isCaptureScreenshotFallback` pattern used in OAnQuan/Makruk to render the real
 "Unlock — $2.99" button copy when `KL_CAPTURE == "upgrade"` and product load has
 failed. Recaptured and verified both locales now show the correct button.
-**Not yet pushed to ASC** — v1.0.4 is `WAITING_FOR_REVIEW`; whether its screenshots can
-still be updated mid-review needs the user's call.
+**Pulled, fixed, and resubmitted per standing user policy** (found post-submit bug →
+cancel → fix → resubmit, applies to all apps): canceled the v1.0.4 reviewSubmission
+(`86819596-...`, which was already `IN_REVIEW` — Apple still allows pulling it;
+`CANCELING`→`COMPLETE` took a bit longer than a plain `WAITING_FOR_REVIEW` cancel),
+bumped to **v1.0.5 (build 8)** in `project.yml`, archived/exported/uploaded (Delivery
+UUID `e18ac6a4-84af-491f-83b3-3bd5fc8c6f6b`, processed `VALID`), attached to the same
+appStoreVersion record (versionString PATCHed 1.0.4→1.0.5), pushed the corrected
+screenshots via `asc_push_klotski_screenshots.py`, updated `whatsNew` (both locales),
+created a new reviewSubmission `14d54493-d882-48c1-95da-48fc6e8af645` and submitted.
+**Verified: WAITING_FOR_REVIEW as v1.0.5.** (The separate pre-existing IAP-never-
+approved question from [[project_klotski_iap_readytosubmit_investigation]] is
+unaffected by this cycle — not addressed here, still its own follow-up.)
 
 **2026-08-24 — v1.0.4 (build 7), DEBUG bug fix, SUBMITTED.** Found by the new portfolio-wide
 `~/asc-tools/compliance_gate.py`: `PurchaseManager.updateEntitlementStatus()`'s DEBUG branch
