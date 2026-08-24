@@ -66,6 +66,8 @@
 "upgrade.feature2" = "所有关卡均可使用提示";
 "upgrade.feature3" = "永久无广告";
 "upgrade.buy" = "解锁 — %@";
+"upgrade.loadFailed" = "无法加载购买选项。";
+"upgrade.tryAgain" = "重试";
 "upgrade.owned" = "你已拥有专业版 ✓";
 "upgrade.restore" = "恢复购买";
 "upgrade.notnow" = "暂不购买";

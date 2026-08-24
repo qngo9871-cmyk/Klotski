@@ -66,6 +66,8 @@
 "upgrade.feature2" = "Hint system for every puzzle";
 "upgrade.feature3" = "No ads, ever";
 "upgrade.buy" = "Unlock — %@";
+"upgrade.loadFailed" = "Unable to load purchase option.";
+"upgrade.tryAgain" = "Try Again";
 "upgrade.owned" = "You own Klotski Pro ✓";
 "upgrade.restore" = "Restore Purchases";
 "upgrade.notnow" = "Not Now";

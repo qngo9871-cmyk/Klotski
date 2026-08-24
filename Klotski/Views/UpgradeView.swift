@@ -47,12 +47,20 @@ struct UpgradeView: View {
                                 // both #if DEBUG and the KL_CAPTURE screenshot launch arg.
                                 Text(String(format: L("upgrade.buy"), "$2.99"))
                                     .font(.title3.bold()).frame(maxWidth: 260).padding()
+                            } else if purchases.productLoadFailed {
+                                Text(L("upgrade.loadFailed"))
+                                    .font(.subheadline).foregroundStyle(.white.opacity(0.75))
                             } else {
                                 ProgressView().tint(.white)
                             }
                         }
                         .buttonStyle(.borderedProminent).tint(.red)
                         .disabled(purchases.isPurchasing || (purchases.product == nil && !isCaptureScreenshotFallback))
+
+                        if purchases.productLoadFailed && !isCaptureScreenshotFallback {
+                            Button(L("upgrade.tryAgain")) { Task { await purchases.loadProduct() } }
+                                .buttonStyle(.bordered).tint(.white)
+                        }
 
                         Button(L("upgrade.restore")) { Task { await purchases.restorePurchases() } }
                             .font(.footnote).foregroundStyle(.white.opacity(0.6))
