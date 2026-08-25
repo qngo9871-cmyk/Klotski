@@ -1,3 +1,21 @@
+**2026-08-25 — fixed a real gap the new `compliance_gate.py` paywall-fallback check
+found: `UpgradeView.swift` never actually checked `purchases.productLoadFailed`.**
+Yesterday's fix (v1.0.5) only added a DEBUG-only branch for the screenshot-capture
+case — a real user hitting a genuine StoreKit product-load failure (rare, but
+possible: no network, misconfigured product ID, etc.) would still see a permanent
+spinner with no way to retry. Added a proper `purchases.productLoadFailed` branch
+(real "Unable to load purchase option." text + a "Try Again" button calling
+`loadProduct()` again) matching the OAnQuan/Makruk pattern, plus the two new
+localization keys (`upgrade.loadFailed`, `upgrade.tryAgain`) in both `en.lproj`/
+`zh-Hans.lproj`. Build verified: `xcodegen generate` + Debug simulator build →
+**BUILD SUCCEEDED**. Re-ran `compliance_gate.py Klotski --all` — all 7 local checks
+now pass. **Code committed only (`3b9950e`) — NOT yet built/archived/uploaded/
+submitted.** v1.0.5 (the version carrying yesterday's screenshot-only fix) is already
+`READY_FOR_SALE`/live, so shipping this would be a 3rd touch on this app in 24 hours —
+holding for the user's explicit go-ahead on whether to ship now or bundle into the
+next natural update, since this gap is narrow (rare real-world StoreKit failure, not
+visible in any screenshot or App Review path).
+
 # Klotski — Huarong Dao Puzzle
 
 Native SwiftUI iOS app for Klotski (Huarong Dao / 华容道), the classic Chinese
