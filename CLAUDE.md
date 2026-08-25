@@ -9,12 +9,17 @@ spinner with no way to retry. Added a proper `purchases.productLoadFailed` branc
 localization keys (`upgrade.loadFailed`, `upgrade.tryAgain`) in both `en.lproj`/
 `zh-Hans.lproj`. Build verified: `xcodegen generate` + Debug simulator build →
 **BUILD SUCCEEDED**. Re-ran `compliance_gate.py Klotski --all` — all 7 local checks
-now pass. **Code committed only (`3b9950e`) — NOT yet built/archived/uploaded/
-submitted.** v1.0.5 (the version carrying yesterday's screenshot-only fix) is already
-`READY_FOR_SALE`/live, so shipping this would be a 3rd touch on this app in 24 hours —
-holding for the user's explicit go-ahead on whether to ship now or bundle into the
-next natural update, since this gap is narrow (rare real-world StoreKit failure, not
-visible in any screenshot or App Review path).
+now pass. **Shipped as v1.0.6 (build 9) per user's explicit go-ahead** — v1.0.5 was
+already `READY_FOR_SALE`/live, so nothing to cancel: created appStoreVersion
+`3bfaae15-5048-45c7-9abe-e4a9d145b923` (versionString 1.0.6, localizations copied
+forward), archived/exported/uploaded (Delivery UUID
+`e5df21dc-5128-4554-a6db-f0b51957b6af`, processed `VALID`), attached the build, set
+`whatsNew` (both locales), created reviewSubmission
+`ff828274-d7fa-4b3b-ab28-99d31316e104` and submitted. **Verified: WAITING_FOR_REVIEW
+as v1.0.6.** This is the 3rd version of this app submitted within 24 hours
+(1.0.4→1.0.5→1.0.6), all bug-fix-only updates to an already-live app, not new-app
+submissions — consistent with the user's standing view that Apple's burst-submission
+concern applies to bursts of new apps, not to fixing an existing live one.
 
 # Klotski — Huarong Dao Puzzle
 
