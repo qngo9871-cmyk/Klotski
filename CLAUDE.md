@@ -378,13 +378,32 @@ xcodebuild -project Klotski.xcodeproj -scheme Klotski -destination 'generic/plat
 xcrun devicectl device install app --device F8EF55D6-E237-574F-8AB8-EF8EB0693D45 <path-to-.app>
 ```
 
-App Store archive/upload (distribution profile already exists after the first
-export — the `-authenticationKey*` flags were only needed once):
+App Store archive/upload. **Correction (2026-08-30): the `-authenticationKey*`
+flags are needed on EVERY archive/export, not just once** — this machine has no
+Xcode-signed-in account, so omitting them (as this section previously said to do)
+makes the archive step silently no-op instead of erroring. Always include them:
 ```
-xcodebuild -project Klotski.xcodeproj -scheme Klotski -configuration Release -archivePath build/Klotski.xcarchive -destination 'generic/platform=iOS' -allowProvisioningUpdates archive
-xcodebuild -exportArchive -archivePath build/Klotski.xcarchive -exportPath build/export -exportOptionsPlist ExportOptions.plist -allowProvisioningUpdates
+xcodebuild -project Klotski.xcodeproj -scheme Klotski -configuration Release -archivePath build/Klotski.xcarchive -destination 'generic/platform=iOS' -allowProvisioningUpdates -authenticationKeyPath /Users/q/.appstoreconnect/private_keys/AuthKey_G85WXB4AF5.p8 -authenticationKeyID G85WXB4AF5 -authenticationKeyIssuerID 2e969722-fc4d-444c-af74-7e0233efd016 archive
+xcodebuild -exportArchive -archivePath build/Klotski.xcarchive -exportPath build/export -exportOptionsPlist ExportOptions.plist -allowProvisioningUpdates -authenticationKeyPath /Users/q/.appstoreconnect/private_keys/AuthKey_G85WXB4AF5.p8 -authenticationKeyID G85WXB4AF5 -authenticationKeyIssuerID 2e969722-fc4d-444c-af74-7e0233efd016
 xcrun altool --upload-app --type ios -f build/export/Klotski.ipa --apiKey G85WXB4AF5 --apiIssuer 2e969722-fc4d-444c-af74-7e0233efd016
 ```
+
+**2026-08-30 (in progress, paused): v1.0.7 shell created in ASC to give the
+Pro IAP (`com.quyenngo.klotski.pro`, stuck at `READY_TO_SUBMIT` since launch —
+see `project_klotski_iap_readytosubmit_investigation` memory) a version to
+ride into review on.** `project.yml` bumped to `MARKETING_VERSION 1.0.7` /
+`CURRENT_PROJECT_VERSION 10`; appStoreVersion `67c9cf66-df3a-4105-b853-e9d24c437be4`
+created with the same description/keywords/promo/whatsNew as live v1.0.6
+(no content change, purely to attach a build and get the IAP through). Archive
+attempt without the auth flags (the bug this section now documents) silently
+produced nothing — paused here per user's call ("leave that one for now") after
+the first attempt. **Still needed to finish:** re-run the archive/export/upload
+above with the auth flags, attach the resulting build via
+`PATCH appStoreVersions/{id}/relationships/build`, then do the **web-UI-only**
+IAP tick-in (My Apps → Klotski → Distribution → v1.0.7 → "In-App Purchases and
+Subscriptions" → + → Klotski Pro; then the IAP's own page → "Add for Review" →
+same draft), then submit and verify the IAP moves past `READY_TO_SUBMIT` (see
+`asc_submit_datten.py`'s pattern).
 
 ASC metadata/IAP/pricing/review-info/screenshots are all scripted and idempotent:
 - `~/asc-tools/asc_push_klotski.py`
