@@ -1,3 +1,21 @@
+**2026-08-30 — resumed and finished the paused v1.0.7 IAP-attach task; Pro IAP now
+riding an actual review for the first time since launch.** Earlier the same day the
+archive/export attempt had silently no-op'd (missing `-authenticationKey*` flags —
+now documented in "Deploy / resubmit pattern" below) and was paused per user's call
+("leave that one for now"). Resumed: re-ran archive/export/upload with the auth-key
+flags included — **ARCHIVE SUCCEEDED**, uploaded (Delivery UUID
+`fa0b18f0-2c81-46a9-8465-bc428a8f4c41`, build 10, processed `VALID`), attached to the
+existing v1.0.7 appStoreVersion (`67c9cf66-df3a-4105-b853-e9d24c437be4`) via `PATCH
+appStoreVersions/{id}/relationships/build`. The IAP tick-in itself is web-UI-only (no
+API access) — user did that step manually (My Apps → Klotski → Distribution → v1.0.7
+→ In-App Purchases and Subscriptions → + → Klotski Pro; then the IAP's own page →
+Add for Review) and submitted. **Verified via API: the Pro IAP
+(`com.quyenngo.klotski.pro`, id `6792362799`) moved `READY_TO_SUBMIT` →
+`WAITING_FOR_REVIEW`, v1.0.7 is `WAITING_FOR_REVIEW`, `releaseType` confirmed
+`AFTER_APPROVAL`.** This closes the long-open `project_klotski_iap_readytosubmit_investigation`
+question pending Apple's review outcome — no content/UI change in this version, purely
+to get the IAP through.
+
 **2026-08-25 — fixed a real gap the new `compliance_gate.py` paywall-fallback check
 found: `UpgradeView.swift` never actually checked `purchases.productLoadFailed`.**
 Yesterday's fix (v1.0.5) only added a DEBUG-only branch for the screenshot-capture
