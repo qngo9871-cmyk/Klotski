@@ -11,8 +11,8 @@ settings:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "1"
     IPHONEOS_DEPLOYMENT_TARGET: "16.0"
-    MARKETING_VERSION: "1.0.7"
-    CURRENT_PROJECT_VERSION: "10"
+    MARKETING_VERSION: "1.0.8"
+    CURRENT_PROJECT_VERSION: "11"
     INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
     ENABLE_PREVIEWS: YES
 
@@ -32,8 +32,8 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown"
         INFOPLIST_KEY_CFBundleDisplayName: "Klotski"
         GENERATE_INFOPLIST_FILE: YES
-        MARKETING_VERSION: "1.0.7"
-        CURRENT_PROJECT_VERSION: "10"
+        MARKETING_VERSION: "1.0.8"
+        CURRENT_PROJECT_VERSION: "11"
     info:
       path: Info.plist
       properties:
